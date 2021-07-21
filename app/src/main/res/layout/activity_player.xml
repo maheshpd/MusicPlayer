@@ -8,12 +8,13 @@
     android:orientation="vertical"
     tools:context=".PlayerActivity">
 
-<!--    First Row-->
+    <!--    First Row-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_weight="1"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
@@ -22,6 +23,7 @@
             android:layout_marginStart="10dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/back_btn"
+            android:padding="5dp"
             android:src="@drawable/back_icon"
             app:tint="@color/black" />
 
@@ -54,34 +56,34 @@
         app:strokeColor="@color/cool_blue"
         app:strokeWidth="5dp" />
 
-<!--    Current Song Name-->
+    <!--    Current Song Name-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:text="@string/song_name"
-        android:layout_weight="1"
         android:textColor="@color/black"
         android:textSize="18sp" />
 
-<!--    Floating Buttons for Previous, Pause % Next-->
+    <!--    Floating Buttons for Previous, Pause % Next-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:gravity="center"
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal">
 
-<!--        Previous Button-->
+        <!--        Previous Button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/previous_icon"
             app:iconSize="40dp" />
 
-<!--        Play & Pause Button-->
+        <!--        Play & Pause Button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +95,7 @@
             app:iconTint="@color/white"
             app:shapeAppearanceOverlay="@style/curved" />
 
-<!--        Next Button-->
+        <!--        Next Button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,13 +103,13 @@
             app:iconSize="40dp" />
     </LinearLayout>
 
-<!--    Seekbar & TextViews for it-->
+    <!--    Seekbar & TextViews for it-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_margin="20dp"
-        android:gravity="center"
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView

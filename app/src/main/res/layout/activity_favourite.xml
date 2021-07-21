@@ -13,6 +13,7 @@
         android:background="@color/cool_pink"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,15 +22,16 @@
             android:layout_height="50dp"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="@string/back_btn"
+            android:padding="5dp"
             android:src="@drawable/back_icon"
             app:tint="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/playlist_btn"
             android:gravity="center"
             android:text="@string/favourite_btn"
-            android:contentDescription="@string/playlist_btn"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -46,8 +48,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeWidth="2dp"
-        app:strokeColor="@color/cool_pink"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="0.9"
+        app:strokeColor="@color/cool_pink"
+        app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
