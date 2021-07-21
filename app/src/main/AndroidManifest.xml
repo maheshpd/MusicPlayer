@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/music_player_icon_round"
         android:supportsRtl="true"
         android:theme="@style/splash_screen">
+        <activity android:name=".PlayerActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
