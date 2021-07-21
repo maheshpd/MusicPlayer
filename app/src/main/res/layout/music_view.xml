@@ -19,6 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="@string/song_name"
+        android:gravity="center_vertical"
+        android:singleLine="true"
         android:layout_toEndOf="@+id/imageMV"
         android:textColor="@color/black"
         android:layout_toStartOf="@id/songDuration"
@@ -31,6 +33,8 @@
         android:text="@string/song_album"
         android:layout_toEndOf="@+id/imageMV"
         android:layout_marginTop="30dp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
         android:layout_toStartOf="@id/songDuration"
         android:layout_marginStart="5dp"/>
     <TextView
