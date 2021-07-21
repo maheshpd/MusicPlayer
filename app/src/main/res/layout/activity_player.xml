@@ -49,6 +49,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="250dp"
+        android:id="@+id/songImgPA"
         android:layout_height="250dp"
         android:layout_margin="10dp"
         android:src="@drawable/music_player"
@@ -58,6 +59,7 @@
 
     <!--    Current Song Name-->
     <TextView
+        android:id="@+id/songNamePA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -86,6 +88,7 @@
         <!--        Play & Pause Button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
+            android:id="@+id/playPausePA"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:backgroundTint="@android:color/holo_red_light"
