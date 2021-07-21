@@ -26,9 +26,18 @@ class PlayerActivity : AppCompatActivity() {
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initializeLayout()
+
         binding.playPausePA.setOnClickListener {
             if (isPlaying) pauseMusic()
             else playMusic()
+        }
+
+        binding.previousBtnPA.setOnClickListener {
+        prevNextSong(increment = false)
+        }
+
+        binding.nextBtnPA.setOnClickListener {
+            prevNextSong(increment = true)
         }
     }
 
@@ -72,6 +81,32 @@ class PlayerActivity : AppCompatActivity() {
         binding.playPausePA.setIconResource(R.drawable.play_icon)
         isPlaying = false
         mediaPlayer!!.pause()
+    }
+
+    private fun prevNextSong(increment: Boolean) {
+        if (increment)
+        {
+            setSongPosition(increment = true)
+            setLayout()
+            createMediaPlayer()
+        } else {
+            setSongPosition(increment = false)
+            setLayout()
+            createMediaPlayer()
+        }
+    }
+
+    private fun setSongPosition(increment: Boolean){
+        if (increment)
+        {
+            if (musicListPA.size - 1 == songPosition)
+                songPosition = 0
+            else ++songPosition
+        } else {
+            if (0 == songPosition)
+                songPosition = musicListPA.size-1
+            else --songPosition
+        }
     }
 
 }

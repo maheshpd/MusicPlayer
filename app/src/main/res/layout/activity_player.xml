@@ -81,6 +81,7 @@
         <!--        Previous Button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
+            android:id="@+id/previousBtnPA"
             android:layout_height="wrap_content"
             app:icon="@drawable/previous_icon"
             app:iconSize="40dp" />
@@ -101,6 +102,7 @@
         <!--        Next Button-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
+            android:id="@+id/nextBtnPA"
             android:layout_height="wrap_content"
             app:icon="@drawable/next_icon"
             app:iconSize="40dp" />
