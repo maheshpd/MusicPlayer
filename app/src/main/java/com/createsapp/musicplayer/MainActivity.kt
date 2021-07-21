@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.shuffleBtn.setOnClickListener {
             val intent = Intent(this, PlayerActivity::class.java)
+            intent.putExtra("index", 0)
+            intent.putExtra("class", "MainActivity")
             startActivity(intent)
         }
 
