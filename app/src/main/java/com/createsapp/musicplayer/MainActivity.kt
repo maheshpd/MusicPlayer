@@ -1,7 +1,7 @@
 package com.createsapp.musicplayer
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.createsapp.musicplayer.databinding.ActivityMainBinding
 
@@ -16,7 +16,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.shuffleBtn.setOnClickListener {
-            Toast.makeText(this,"Shuffle Button was click", Toast.LENGTH_SHORT).show()
+            val intent=Intent(this, PlayerActivity::class.java)
+            startActivity(intent)
         }
+
+        binding.favouriteBtn.setOnClickListener {
+            val intent=Intent(this, FavouriteActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.playlistBtn.setOnClickListener {
+            val intent = Intent(this, PlaylistActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

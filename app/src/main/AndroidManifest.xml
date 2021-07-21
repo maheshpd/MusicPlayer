@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.createsapp.musicplayer">
 
     <application
@@ -9,9 +10,15 @@
         android:roundIcon="@mipmap/music_player_icon_round"
         android:supportsRtl="true"
         android:theme="@style/splash_screen">
-        <activity android:name=".PlaylistActivity"></activity>
-        <activity android:name=".FavouriteActivity" />
-        <activity android:name=".PlayerActivity" />
+        <activity android:name=".PlaylistActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".FavouriteActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".PlayerActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
