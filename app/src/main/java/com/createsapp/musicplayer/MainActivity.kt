@@ -1,16 +1,21 @@
 package com.createsapp.musicplayer
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.createsapp.musicplayer.Adapter.MusicAdapter
 import com.createsapp.musicplayer.databinding.ActivityMainBinding
+import java.io.File
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +24,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var adapter: MusicAdapter
 
+    companion object {
+       lateinit var MusicListMA: ArrayList<Music>
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -83,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun initalizeLayout(){
         requestRuntimePermission()
         setTheme(R.style.coolPinkNav)
@@ -95,19 +106,46 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val musicList = ArrayList<String>()
-        musicList.add("1 Song")
-        musicList.add("2 Song")
-        musicList.add("3 Song")
-        musicList.add("4 Song")
-        musicList.add("5 Song")
+       MusicListMA = getAllAudio()
 
         binding.musicRV.setHasFixedSize(true)
         binding.musicRV.setItemViewCacheSize(13)
         binding.musicRV.layoutManager = LinearLayoutManager(this@MainActivity)
-        adapter = MusicAdapter(this@MainActivity,musicList)
+        adapter = MusicAdapter(this@MainActivity, MusicListMA)
         binding.musicRV.adapter = adapter
         binding.totalSongs.text = "Total Songs :${adapter.itemCount}"
     }
 
+    @SuppressLint("Recycle")
+    @RequiresApi(Build.VERSION_CODES.R)
+    private fun getAllAudio(): ArrayList<Music> {
+        val tempList = ArrayList<Music>()
+        val selection = MediaStore.Audio.Media.IS_MUSIC + "!=0"
+
+        val projection = arrayOf(MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ALBUM,
+            MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATE_ADDED,
+        MediaStore.Audio.Media.DATA)
+
+        val cursor = this.contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, projection, selection, null,
+        MediaStore.Audio.Media.DATE_ADDED + "DESC", null)
+
+        if (cursor != null)
+            if (cursor.moveToFirst())
+                do{
+                    val titleC = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))
+                    val idC = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID))
+                    val albumC = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM))
+                    val artistC = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
+                    val pathC = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
+                    val durationC = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION))
+
+                    val music = Music(idC,titleC,albumC,artistC,durationC,pathC)
+                    val file = File(music.path)
+                    if (file.exists())
+                        tempList.add(music)
+
+                }while (cursor.moveToNext())
+                cursor!!.close()
+        return tempList
+    }
 }
