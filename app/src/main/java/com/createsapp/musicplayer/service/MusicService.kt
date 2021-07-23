@@ -11,6 +11,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.app.NotificationCompat
 import com.createsapp.musicplayer.PlayerActivity
 import com.createsapp.musicplayer.R
+import com.createsapp.musicplayer.model.getImageArt
 import com.createsapp.musicplayer.utils.ApplicationClass
 import com.createsapp.musicplayer.utils.NotificationReceiver
 
@@ -45,12 +46,19 @@ class MusicService: Service() {
         val exitIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(ApplicationClass.PREVIOUS)
         val exitPendingIntent = PendingIntent.getBroadcast(baseContext,0,exitIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
+        val imgArt = getImageArt(PlayerActivity.musicListPA[PlayerActivity.songPosition].path)
+
+        val image = if (imgArt != null) {
+            BitmapFactory.decodeByteArray(imgArt,0,imgArt.size)
+        } else{
+            BitmapFactory.decodeResource(resources, R.drawable.music_player)
+        }
 
         val notification = NotificationCompat.Builder(baseContext, ApplicationClass.CHANNEL_ID)
             .setContentTitle(PlayerActivity.musicListPA[PlayerActivity.songPosition].title)
             .setContentText(PlayerActivity.musicListPA[PlayerActivity.songPosition].artUri)
             .setSmallIcon(R.drawable.music_icon)
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.music_player))
+            .setLargeIcon(image)
             .setStyle(androidx.media.app.NotificationCompat.MediaStyle().setMediaSession(mediaSession.sessionToken))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
