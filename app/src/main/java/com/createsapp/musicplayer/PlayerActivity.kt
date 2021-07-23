@@ -1,5 +1,6 @@
 package com.createsapp.musicplayer
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
@@ -21,10 +22,9 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
 //        var mediaPlayer:MediaPlayer? = null
         var isPlaying:Boolean = false
         var musicService: MusicService? = null
+        @SuppressLint("StaticFieldLeak")
+        lateinit var binding: ActivityPlayerBinding
     }
-
-    private lateinit var binding: ActivityPlayerBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,11 +93,13 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
 
     private fun playMusic(){
         binding.playPausePA.setIconResource(R.drawable.pause_icon)
+        musicService!!.showNotification(R.drawable.pause_icon)
         isPlaying = true
         musicService!!.mediaPlayer!!.start()
     }
     private fun pauseMusic(){
         binding.playPausePA.setIconResource(R.drawable.play_icon)
+        musicService!!.showNotification(R.drawable.play_icon)
         isPlaying = false
         musicService!!.mediaPlayer!!.pause()
     }
@@ -132,7 +134,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
         val binder = service as MusicService.MyBinder
         musicService = binder.currentService()
         createMediaPlayer()
-        musicService!!.showNotification()
+        musicService!!.showNotification(R.drawable.pause_icon)
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
