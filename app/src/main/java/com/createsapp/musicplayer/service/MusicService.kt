@@ -11,6 +11,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.app.NotificationCompat
 import com.createsapp.musicplayer.PlayerActivity
 import com.createsapp.musicplayer.R
+import com.createsapp.musicplayer.model.formatDuration
 import com.createsapp.musicplayer.model.getImageArt
 import com.createsapp.musicplayer.utils.ApplicationClass
 import com.createsapp.musicplayer.utils.NotificationReceiver
@@ -80,6 +81,10 @@ class MusicService: Service() {
             PlayerActivity.musicService!!.mediaPlayer!!.prepare()
             PlayerActivity.binding.playPausePA.setIconResource(R.drawable.pause_icon)
             PlayerActivity.musicService!!.showNotification(R.drawable.pause_icon)
+            PlayerActivity.binding.tvSeekBarStart.text = formatDuration(PlayerActivity.musicService!!.mediaPlayer!!.currentPosition.toLong())
+            PlayerActivity.binding.tvSeekBarEnd.text = formatDuration(PlayerActivity.musicService!!.mediaPlayer!!.duration.toLong())
+            PlayerActivity.binding.seekBarPA.progress = 0
+            PlayerActivity.binding.seekBarPA.max = PlayerActivity.musicService!!.mediaPlayer!!.duration
         } catch (e:Exception){return}
     }
 
