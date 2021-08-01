@@ -24,7 +24,7 @@ class NotificationReceiver: BroadcastReceiver() {
             }
         }
     }
-
+    //
     private fun playMusic(){
         PlayerActivity.isPlaying = true
         PlayerActivity.musicService!!.mediaPlayer!!.start()
