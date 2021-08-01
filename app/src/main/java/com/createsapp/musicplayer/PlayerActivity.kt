@@ -17,7 +17,7 @@ import com.createsapp.musicplayer.model.formatDuration
 import com.createsapp.musicplayer.model.setSongPosition
 import com.createsapp.musicplayer.service.MusicService
 
-class PlayerActivity : AppCompatActivity(), ServiceConnection {
+class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCompletionListener {
 
     companion object{
        lateinit var musicListPA: ArrayList<Music>
@@ -89,6 +89,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
             binding.tvSeekBarEnd.text = formatDuration(musicService!!.mediaPlayer!!.duration.toLong())
             binding.seekBarPA.progress = 0
             binding.seekBarPA.max = musicService!!.mediaPlayer!!.duration
+            musicService!!.mediaPlayer!!.setOnCompletionListener(this)
         } catch (e:Exception){return}
     }
 
@@ -147,6 +148,16 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
 
     override fun onServiceDisconnected(name: ComponentName?) {
         musicService = null
+    }
+
+    override fun onCompletion(mp: MediaPlayer?) {
+       setSongPosition(increment = true)
+        createMediaPlayer()
+        try {
+            setLayout()
+        }catch (e:Exception) {
+            return
+        }
     }
 
 }
