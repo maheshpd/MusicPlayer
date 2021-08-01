@@ -1,6 +1,7 @@
 package com.createsapp.musicplayer.model
 
 import android.media.MediaMetadataRetriever
+import com.createsapp.musicplayer.PlayerActivity
 import java.util.concurrent.TimeUnit
 
 data class Music(val id: String, val title: String, val album: String, val artist: String,
@@ -17,4 +18,17 @@ fun getImageArt(path: String): ByteArray? {
     val retriever = MediaMetadataRetriever()
     retriever.setDataSource(path)
     return retriever.embeddedPicture
+}
+
+fun setSongPosition(increment: Boolean){
+    if (increment)
+    {
+        if (PlayerActivity.musicListPA.size - 1 == PlayerActivity.songPosition)
+            PlayerActivity.songPosition = 0
+        else ++PlayerActivity.songPosition
+    } else {
+        if (0 == PlayerActivity.songPosition)
+            PlayerActivity.songPosition = PlayerActivity.musicListPA.size-1
+        else --PlayerActivity.songPosition
+    }
 }
