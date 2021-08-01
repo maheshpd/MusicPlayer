@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.createsapp.musicplayer.databinding.ActivityPlayerBinding
@@ -27,6 +28,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         var musicService: MusicService? = null
         @SuppressLint("StaticFieldLeak")
         lateinit var binding: ActivityPlayerBinding
+        var repeat: Boolean = false
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +69,15 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
 
         })
+        binding.repeatBtnPA.setOnClickListener {
+            if (!repeat){
+                repeat = true
+                binding.repeatBtnPA.setColorFilter(ContextCompat.getColor(this,R.color.purple_500))
+            } else {
+                repeat = false
+                binding.repeatBtnPA.setColorFilter(ContextCompat.getColor(this,R.color.cool_pink))
+            }
+        }
 
     }
 
@@ -73,6 +85,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         Glide.with(this).load(musicListPA[songPosition].artUri).apply(RequestOptions().placeholder(R.drawable.music_player).centerCrop())
             .into(binding.songImgPA)
         binding.songNamePA.text = musicListPA[songPosition].title
+        if (repeat) binding.repeatBtnPA.setColorFilter(ContextCompat.getColor(this,R.color.purple_500))
     }
 
     private fun createMediaPlayer(){

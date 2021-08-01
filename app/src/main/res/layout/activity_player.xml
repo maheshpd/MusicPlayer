@@ -141,13 +141,16 @@
             android:textSize="15sp" />
     </LinearLayout>
 
+<!--    Last Row for Various Player Options-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal">
 
+<!--Repeat Button-->
         <ImageButton
+            android:id="@+id/repeatBtnPA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
